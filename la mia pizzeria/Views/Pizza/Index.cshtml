@@ -1,0 +1,33 @@
+﻿@model List<Pizza>
+
+@{
+
+}
+
+<main class="container text-center">
+
+    <h1>Chi siamo</h1>
+
+    <img src="/img/scroll.png" width=50% />
+
+    <h1 class="my-3">Il nostro olimpo</h1>
+    <p>Qui trovi le nostre pizze migliori, le grandi star del nostro pantheon</p>
+
+    <div class="container-flex">
+
+        <div class="justify-content-center mb-3">
+
+            <h3 class="js_no_pizze d-none">Il nostro olimpo è vuoto, ci scusiamo per il disagio</h3>
+            <div class="d-none js_pizza_table row">
+            </div>
+        </div>
+        <div class="my-2"><a asp-controller="Pizza" asp-action="LeNostrePizze" class="text-black"><h2>Scopri le nostre pizze</h2></a></div>
+    </div>
+
+</main>
+
+@section Scripts {
+    <script type="text/javascript">
+
+        LoadApiPizze()</script>
+}
