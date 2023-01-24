@@ -30,12 +30,18 @@ namespace la_mia_pizzeria.Controllers
             return Ok(ListaPizze);
         }
 
-       /* [HttpGet]
+        [HttpGet("{id}")]
         public IActionResult Get(int id)
         {
-
+            using PizzeriaContext db = new();
+            Pizza Pizza = db.Pizze.Where(P=>P.Id== id).Include(Pizza=>Pizza.Ingredienti).FirstOrDefault();
+            if(Pizza is null)
+            {
+                return NotFound("Mario, sembra che la tua pizza sia in un altro castello");
+            }
+            return Ok(Pizza);
         }
-       */
+       
 
     }
 }

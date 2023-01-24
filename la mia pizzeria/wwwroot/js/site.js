@@ -34,7 +34,7 @@
                     <div class="card-body">
                         <h5 class="card-title">${pizza.nome}</h5>
                         <p class="card-text">${pizza.descrizione}</p>
-                        
+                        <a href="/Pizza/Dettagli/${pizza.id}">Vedi i dettagli</a>
                     </div>
                 </div>
             </div>
@@ -73,6 +73,7 @@ function loadAMenu(search) {
                     <div class="card-body">
                         <h5 class="card-title">${pizza.nome}</h5>
                         <p class="card-text">${pizza.descrizione}</p>
+                            <a href="/Pizza/Dettagli/${pizza.id}">Vedi i dettagli</a>
                     </div>
                 </div>
             </div>

@@ -6,30 +6,42 @@
             <div class="d-flex align-items-center">
                 <h1 class="mt-3 mb-3">Dettagli Pizze</h1>
             </div>
-            <div class="post-single-image-container">
-                <img src="@Model.Immagine" width=100%>
+            <div id="pizza_container">
+                
             </div>
-            <p>
-                <strong>Nome:</strong>
-                @Model.Nome
-            </p>
-            <p>
-                <strong>Ingredienti:</strong>
-                @Model.Descrizione
-            </p>
-            <p>
-                <strong>Categoria:</strong>
-                @Model.Categoria.Nome
-            </p>
-            <p>
-                <strong>Ingredienti:</strong>
-                @foreach (Ingrediente ingrediente in Model.Ingredienti)
-                {
-                    <div>
-                        <label>@ingrediente.Condimento</label>
-                    </div>
-                }
-            </p>
         </div>
     </div>
 </div>
+
+
+@section Scripts {
+    <script type="text/javascript">
+        const id = window.location.href.substring(window.location.href.lastIndexOf('/') + 1)
+        axios.get(`https://localhost:7237/api/pizze/${id}`).then((res) => {
+            let pizza = res.data;
+            console.log('pizza ricevuta', pizza);
+
+
+            document.getElementById('pizza_container').innerHTML +=
+                `
+                                            <div class="post-single-image-container">
+                            <img src="${pizza.immagine}" width=100%>
+                        </div>
+                        <p>
+                            <strong>Nome:</strong>
+        ${pizza.nome}
+                        </p>
+                        <p>
+                            <strong>Ingredienti:</strong>
+        ${pizza.descrizione}
+                        </p>
+                        <p>
+                            <strong>Categoria:</strong>
+        ${pizza.categoriaNome}
+                        </p>
+                        <p>                      
+                                `;
+
+        });
+    </script>
+}
