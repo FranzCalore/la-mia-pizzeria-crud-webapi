@@ -12,12 +12,30 @@ namespace la_mia_pizzeria.Controllers
     {
 
         [HttpGet]
-        public IActionResult GetSpecial()
+        public IActionResult Get(string? search)
         {
             using PizzeriaContext db = new();
-            List<Pizza> ListaPizze = db.Pizze.Include(Pizza=>Pizza.Ingredienti).Where(Pizza=>Pizza.Categoria.Nome=="Pizze Speciali").ToList();
+            List<Pizza> ListaPizze = new();
+            if (search is null || search == "")
+            {
+                ListaPizze = db.Pizze.Include(Pizza => Pizza.Ingredienti).ToList();
+            }
+            else
+            {
+                search = search.ToLower();
+                ListaPizze = db.Pizze.Include(Pizza => Pizza.Ingredienti)
+                                     .Where(Pizza => Pizza.Nome.ToLower().Contains(search) || Pizza.Ingredienti.Any(Ing=>Ing.Condimento.ToLower().Contains(search)) || Pizza.CategoriaNome.ToLower().Contains(search) || Pizza.Descrizione.ToLower().Contains(search))
+                                     .ToList();
+            }
             return Ok(ListaPizze);
         }
+
+       /* [HttpGet]
+        public IActionResult Get(int id)
+        {
+
+        }
+       */
 
     }
 }

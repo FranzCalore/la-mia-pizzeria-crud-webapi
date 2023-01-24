@@ -29,7 +29,7 @@ namespace la_mia_pizzeria.Areas.Identity.Pages.Account
             _logger.LogInformation("User logged out.");
             if (returnUrl != null)
             {
-                return LocalRedirect(returnUrl);
+                return RedirectToPage();
             }
             else
             {

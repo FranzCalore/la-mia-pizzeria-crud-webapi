@@ -2,25 +2,17 @@
 using la_mia_pizzeria.Database;
 using la_mia_pizzeria.Models;
 using la_mia_pizzeria.Utils;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Hosting;
 
 namespace la_mia_pizzeria.Controllers
-{
+{ 
     public class PizzaController : Controller
     {
-        public IActionResult LeNostrePizze()
-        {
-            using (PizzeriaContext db = new PizzeriaContext())
-            {
-                List<Pizza> ListaPizze = db.Pizze.ToList<Pizza>();
-
-                return View("LeNostrePizze", ListaPizze);
-            }
-
-        }
+        
 
         public IActionResult Index()
         {
@@ -31,6 +23,24 @@ namespace la_mia_pizzeria.Controllers
                 return View("Index", ListaPizze);
             }
         }
+
+        [Authorize]
+        public IActionResult LeNostrePizzeAdmin()
+        {
+            using (PizzeriaContext db = new PizzeriaContext())
+            {
+                List<Pizza> ListaPizze = db.Pizze.ToList<Pizza>();
+
+                return View("LeNostrePizze", ListaPizze);
+            }
+
+        }
+
+        public IActionResult IlNostroMenu()
+        {
+            return View();
+        }
+
         public IActionResult Dettagli(int ID)
         {
             using (PizzeriaContext db = new PizzeriaContext())
@@ -49,6 +59,7 @@ namespace la_mia_pizzeria.Controllers
         }
 
         [HttpGet]
+        [Authorize]
         public IActionResult NuovaPizza()
         {
             using PizzeriaContext db = new();
@@ -65,6 +76,7 @@ namespace la_mia_pizzeria.Controllers
         }
 
         [HttpPost]
+        [Authorize]
         [ValidateAntiForgeryToken]
         public IActionResult NuovaPizza(CategoriaPizzaView formData)
         {
@@ -97,6 +109,7 @@ namespace la_mia_pizzeria.Controllers
         }
 
         [HttpGet]
+        [Authorize]
         public IActionResult ModificaPizza(int ID)
         {
 
@@ -134,6 +147,7 @@ namespace la_mia_pizzeria.Controllers
             }
         }
         [HttpPost]
+        [Authorize]
         [ValidateAntiForgeryToken]
         public IActionResult ModificaPizza(int ID, CategoriaPizzaView formData)
         {
@@ -174,6 +188,7 @@ namespace la_mia_pizzeria.Controllers
             return RedirectToAction("Index");
         }
 
+        [Authorize]
         public IActionResult EliminaPizza(int ID)
         {
 

@@ -1,0 +1,32 @@
+﻿<main>
+<h1 class="mt-3 mb-3">La nostra offerta:</h1>
+<div>
+    <input id="input_search" type="text" class="form-control mb-5" placeholder="Cerca..." />
+</div>
+
+<div class="container-flex">
+
+    <div class="justify-content-center mb-3">
+
+        <h3 class="js_no_pizze_menu d-none">Il nostro olimpo è vuoto, ci scusiamo per il disagio</h3>
+        <div class="d-none js_pizza_table_menu row">
+        </div>
+    </div>
+</div>
+</main>
+
+
+@section Scripts {
+    <script type="text/javascript">
+
+        debugger;
+        loadAMenu();
+        document.getElementById('input_search').addEventListener('keyup', searchPizzas);
+
+        function searchPizzas() {
+            let stringaDiRicerca = document.getElementById('input_search').value;
+            loadAMenu(stringaDiRicerca);
+        }
+
+    </script>
+}

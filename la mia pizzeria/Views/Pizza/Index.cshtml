@@ -21,7 +21,11 @@
             <div class="d-none js_pizza_table row">
             </div>
         </div>
-        <div class="my-2"><a asp-controller="Pizza" asp-action="LeNostrePizze" class="text-black"><h2>Scopri le nostre pizze</h2></a></div>
+        <div class="my-2"><a asp-controller="Pizza" asp-action="IlNostroMenu" class="text-black"><h2>Scopri le nostre pizze</h2></a></div>
+        @if (User.Identity.IsAuthenticated)
+        {
+            <div class="my-2"><a asp-controller="Pizza" asp-action="LeNostrePizzeAdmin" class="text-black"><h2>Area Admin</h2></a></div>
+        }
     </div>
 
 </main>
@@ -29,5 +33,7 @@
 @section Scripts {
     <script type="text/javascript">
 
-        LoadApiPizze()</script>
+            let search = "speciali";
+            loadAPizze(search);
+</script>
 }
